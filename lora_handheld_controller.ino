@@ -13,6 +13,14 @@ void setup()
 
     buttonTaskInit();
     ledTaskInit();
+    Serial.begin(115200);
+
+    while (!Serial)
+    {
+        delay(10);
+    }
+
+    LOGI("Controller starting");
 
     xTaskCreate(
         buttonTask,

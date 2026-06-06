@@ -1,6 +1,15 @@
 #pragma once
 
 #include <STM32FreeRTOS.h>
+#include <HardwareSerial.h>
+
+extern HardwareSerial Serial;
+
+#define LOGI(fmt, ...) \
+    Serial.printf("[I] " fmt "\r\n", ##__VA_ARGS__)
+
+#define LOGE(fmt, ...) \
+    Serial.printf("[E] " fmt "\r\n", ##__VA_ARGS__)
 
 #define NUM_BUTTONS 6
 #define NUM_PIXELS  6

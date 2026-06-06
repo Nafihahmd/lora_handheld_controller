@@ -18,6 +18,7 @@ void radioTask(void *pv)
             if(evt.type == BTN_SHORT)
             {
                 // Trigger actuator
+                LOGI("BTN Short Press");
 
                 vTaskDelay(
                     pdMS_TO_TICKS(500));
@@ -28,6 +29,7 @@ void radioTask(void *pv)
             else
             {
                 // Status query
+                LOGI("BTN Long Press");
 
                 vTaskDelay(
                     pdMS_TO_TICKS(200));
