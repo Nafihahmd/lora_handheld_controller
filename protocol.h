@@ -103,6 +103,10 @@ static_assert(sizeof(StatusFrame)   == 7);
 // ------------------------------------------------------------
 // Radio initialization and helpers
 // ------------------------------------------------------------
+uint16_t protocolCrc16(
+    const uint8_t* data,
+    size_t len);
+    
 bool buildTriggerPacket(
     uint8_t channel,
     uint8_t counter,

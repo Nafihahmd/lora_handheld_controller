@@ -23,6 +23,8 @@ enum LedState {
     LED_READY,
     LED_TRIGGERED,
     LED_WAITING,
+    LED_TIMEOUT,
+    LED_LOW_BATTERY,
     LED_ERROR
 };
 

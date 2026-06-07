@@ -1,6 +1,6 @@
 #include "protocol.h"
 
-static uint16_t crc16_ccitt(
+uint16_t protocolCrc16(
     const uint8_t *data,
     size_t len)
 {
@@ -39,7 +39,7 @@ bool buildTriggerPacket(
     frame.payload.command = CMD_TRIGGER;
 
     frame.payload.crc16 =
-        crc16_ccitt(
+        protocolCrc16(
             (uint8_t *)&frame.payload,
             sizeof(CmdPayload) - sizeof(uint16_t));
 
@@ -69,7 +69,7 @@ bool buildStatusRequestPacket(
     frame.payload.command = CMD_STATUS;
 
     frame.payload.crc16 =
-        crc16_ccitt(
+        protocolCrc16(
             (uint8_t *)&frame.payload,
             sizeof(CmdPayload) - sizeof(uint16_t));
 
