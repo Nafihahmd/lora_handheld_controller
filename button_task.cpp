@@ -56,6 +56,17 @@ static void handleEvent(
     }
 }
 
+void startupBuzzerPattern()
+{
+    tone(BUZZER_PIN, 3000);
+    delay(100);
+
+    tone(BUZZER_PIN, 4000);
+    delay(100);
+
+    noTone(BUZZER_PIN);
+}
+
 void buttonTaskInit(void)
 {
     for(int i=0;i<NUM_BUTTONS;i++)
@@ -70,12 +81,15 @@ void buttonTaskInit(void)
     buttonConfig.setFeature(ButtonConfig::kFeatureLongPress);
 
     buttonConfig.setLongPressDelay(1000);
+
 }
 
 void buttonTask(void *pv)
 {
     TickType_t lastWake =
         xTaskGetTickCount();
+    
+    startupBuzzerPattern();
 
     while(1)
     {
