@@ -15,11 +15,25 @@ void ledTaskInit(void)
     pixels.show();
 }
 
+void startupLedPattern()
+{
+    for(int i=0; i<(NUM_PIXELS/2); i++){
+        pixels.setPixelColor(i*2, pixels.Color(30,30,30));
+        pixels.setPixelColor((i*2+1), pixels.Color(30,30,30));
+        pixels.show();
+        delay(200);
+        pixels.clear();
+    }
+
+}
+
 void ledTask(void *pv)
 {
     bool blink = false;
-  // pinMode(LED_CTRL, OUTPUT);
-  // digitalWrite(LED_CTRL, HIGH);
+    pinMode(LED_CTRL, OUTPUT);
+    digitalWrite(LED_CTRL, LOW);
+
+    startupLedPattern();
 
     while(1)
     {
