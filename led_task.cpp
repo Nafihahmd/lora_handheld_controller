@@ -90,6 +90,14 @@ void ledTask(void *pv)
                             0);
                     }
                     break;
+                
+                case LED_TIMEOUT:
+                        pixels.setPixelColor(
+                            i,
+                            pixels.Color(
+                                0,0,100));
+                    break;
+
             }
         }
 
