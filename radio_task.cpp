@@ -45,8 +45,8 @@ void radioTask(void *pv)
     ConfigLoRa_t config;
     config.frequency = 865.0;
     // state = radio.begin(config);
-    
-     state = radio.begin(865.0, 125.0, 12, 8, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 22, 8, 0, false);
+
+    state = radio.begin(865.0, 125.0, 10, 7, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 22, 180, 0, false);
 
     if (state != RADIOLIB_ERR_NONE)
     {
@@ -162,20 +162,18 @@ void radioTask(void *pv)
                     {
                         switch (ack.result)
                         {
-                            case RES_ACCEPTED:
-                            case RES_ALREADY_FIRED:
+                        case RES_ACCEPTED:
+                        case RES_ALREADY_FIRED:
 
-                                ledStates[
-                                    ack.channel] =
-                                    LED_TRIGGERED;
-                                break;
+                            ledStates[ack.channel] =
+                                LED_TRIGGERED;
+                            break;
 
-                            default:
+                        default:
 
-                                ledStates[
-                                    ack.channel] =
-                                    LED_ERROR;
-                                break;
+                            ledStates[ack.channel] =
+                                LED_ERROR;
+                            break;
                         }
 
                         pending.active = false;
@@ -202,34 +200,30 @@ void radioTask(void *pv)
                     {
                         switch (status.state)
                         {
-                            case STATE_READY:
+                        case STATE_READY:
 
-                                ledStates[
-                                    status.channel] =
-                                    LED_READY;
-                                break;
+                            ledStates[status.channel] =
+                                LED_READY;
+                            break;
 
-                            case STATE_FIRED:
+                        case STATE_FIRED:
 
-                                ledStates[
-                                    status.channel] =
-                                    LED_TRIGGERED;
-                                break;
+                            ledStates[status.channel] =
+                                LED_TRIGGERED;
+                            break;
 
-                            default:
+                        default:
 
-                                ledStates[
-                                    status.channel] =
-                                    LED_ERROR;
-                                break;
+                            ledStates[status.channel] =
+                                LED_ERROR;
+                            break;
                         }
 
                         pending.active = false;
 
                         if (status.battery < 20)
                         {
-                            ledStates[
-                                status.channel] =
+                            ledStates[status.channel] =
                                 LED_LOW_BATTERY;
 
                             vTaskDelay(
@@ -238,19 +232,17 @@ void radioTask(void *pv)
                             switch (
                                 status.state)
                             {
-                                case STATE_READY:
+                            case STATE_READY:
 
-                                    ledStates[
-                                        status.channel] =
-                                        LED_READY;
-                                    break;
+                                ledStates[status.channel] =
+                                    LED_READY;
+                                break;
 
-                                case STATE_FIRED:
+                            case STATE_FIRED:
 
-                                    ledStates[
-                                        status.channel] =
-                                        LED_TRIGGERED;
-                                    break;
+                                ledStates[status.channel] =
+                                    LED_TRIGGERED;
+                                break;
                             }
                         }
                     }
@@ -263,7 +255,7 @@ void radioTask(void *pv)
         if (pending.active)
         {
             if ((millis() -
-                pending.startMs) >
+                 pending.startMs) >
                 3000)
             {
                 LOGE(
@@ -271,12 +263,12 @@ void radioTask(void *pv)
                     pending.channel,
                     pending.counter);
 
-                ledStates[
-                    pending.channel] =
+                ledStates[pending.channel] =
                     LED_TIMEOUT;
 
                 pending.active = false;
             }
         }
+        vTaskDelay(pdMS_TO_TICKS(5));
     }
 }

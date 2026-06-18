@@ -35,7 +35,7 @@ void setup()
         "RAD",
         512,
         NULL,
-        2,
+        1,
         NULL);
 
     xTaskCreate(
@@ -43,7 +43,7 @@ void setup()
         "LED",
         256,
         NULL,
-        1,
+        2,
         NULL);
 
     vTaskStartScheduler();
