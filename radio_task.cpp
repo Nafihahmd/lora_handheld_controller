@@ -221,7 +221,7 @@ void radioTask(void *pv)
 
                         pending.active = false;
 
-                        if (status.battery < 20)
+                        if (status.battery < 25)
                         {
                             ledStates[status.channel] =
                                 LED_LOW_BATTERY;

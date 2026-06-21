@@ -97,6 +97,14 @@ void ledTask(void *pv)
                             pixels.Color(
                                 0,0,100));
                     break;
+                
+                case LED_LOW_BATTERY:
+                        pixels.setPixelColor(
+                            i,
+                            pixels.Color(
+                                125,125,0));
+                    break;
+
 
             }
         }
